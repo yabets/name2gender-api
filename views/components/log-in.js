@@ -1,4 +1,4 @@
-let loginTemplate = document.createElement('template');
+const loginTemplate = document.createElement('template');
 loginTemplate.innerHTML = `
     <style>
         .login-card {
@@ -100,14 +100,14 @@ loginTemplate.innerHTML = `
         </form>
 
     </div>
-`
+`;
 class LogIn extends HTMLElement {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        let shadowRoot = this.attachShadow({mode:'open'});
-        shadowRoot.appendChild(loginTemplate.content.cloneNode(true));
-    }
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    shadowRoot.appendChild(loginTemplate.content.cloneNode(true));
+  }
 }
 
 window.customElements.define('log-in', LogIn);

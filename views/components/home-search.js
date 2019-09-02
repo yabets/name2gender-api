@@ -1,5 +1,5 @@
-let homeTemplate = document.createElement('template');
-    homeTemplate.innerHTML = `
+const homeTemplate = document.createElement('template');
+homeTemplate.innerHTML = `
         <style>
             .welcome-box {
                 padding: 40px;
@@ -30,36 +30,35 @@ let homeTemplate = document.createElement('template');
         <div class="welcome-box">
             <br/>
             <h1>Welcome</h1>
-            <form>
+            <div>
                 <input type="text" id="search" name="name" placeholder="Search for name . . .">
                 <input type="button" name="submit" value="Search" id="searchBtn">
-            </form>
+            </div>
         </div>
         <slot></slot> <!-- slotted content appears here -->
     `;
 class HomeSearch extends HTMLElement {
-    // Can define constructor arguments if you wish.
-    constructor() {
-        // If you define a constructor, always call super() first!
-        // This is specific to CE and required by the spec.
-        super();
+  // Can define constructor arguments if you wish.
+  constructor() {
+    // If you define a constructor, always call super() first!
+    // This is specific to CE and required by the spec.
+    super();
 
-        // Attach a shadow root to the element.
-        let shadowRoot = this.attachShadow({mode: 'open'});
-        shadowRoot.appendChild(homeTemplate.content.cloneNode(true));
-    }
+    // Attach a shadow root to the element.
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    shadowRoot.appendChild(homeTemplate.content.cloneNode(true));
+  }
 
-    connectedCallback() {
-        this.shadowRoot.querySelector('#searchBtn').addEventListener('click', e => {
-            let q = this.shadowRoot.querySelector('#search').value;
-            let nameNode = this.shadowRoot.querySelector('name-display');
-            if(!nameNode) { 
-                nameNode = document.createElement('name-display');
-                this.shadowRoot.querySelector('.welcome-box').appendChild(nameNode); 
-            } 
-            nameNode.setAttribute('search', q);
-        });
-    }
-    
+  connectedCallback() {
+    this.shadowRoot.querySelector('#searchBtn').addEventListener('click', (e) => {
+      const q = this.shadowRoot.querySelector('#search').value;
+      let nameNode = this.shadowRoot.querySelector('name-display');
+      if (!nameNode) {
+        nameNode = document.createElement('name-display');
+        this.shadowRoot.querySelector('.welcome-box').appendChild(nameNode);
+      }
+      nameNode.setAttribute('search', q);
+    });
+  }
 }
 window.customElements.define('home-search', HomeSearch);

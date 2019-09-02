@@ -69,14 +69,18 @@ class NavBar extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if(oldValue && newValue){
-            this.changeActive(oldValue, newValue);
-        }
+        this.changeActive(oldValue, newValue);
     }
 
     changeActive = (from, to) => {
-        this.shadowRoot.querySelector(`a[href='${from}']`).classList.toggle("active");
-        this.shadowRoot.querySelector(`a[href='${to}']`).classList.toggle("active");
+        if(from) {
+            this.shadowRoot.querySelector(`a[href='${from}']`).classList.toggle("active");
+        } else {
+            this.shadowRoot.querySelector(`a[href='#home']`).classList.toggle("active");
+        }
+        if(to) {
+            this.shadowRoot.querySelector(`a[href='${to}']`).classList.toggle("active");
+        }
             
     }
 
@@ -85,9 +89,6 @@ class NavBar extends HTMLElement {
 
         let shadowRoot = this.attachShadow({mode:'open'});
         shadowRoot.appendChild(navTemplate.content.cloneNode(true));
-
-        // TODO:: set active class based on selected menu
-        // selected menu will be passed as attribute
     }
 }
 

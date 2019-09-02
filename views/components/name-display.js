@@ -115,19 +115,11 @@ class NameDisplay extends HTMLElement {
         // step 1: get search keyword
         const q = this.search;
         // step 2: fetch the name
-        fetch(`name/db.json`)
+        fetch(`/api/names?name=${q}`)
                 .then((response) => response.json())
                 .then((myJson) => {
-                    myJson = myJson.names;
-                    let result = [];
-                    myJson.some((person)=>{
-                        if(person.name == q){
-                            result.push(person);
-                            return true;
-                        }
-                    });
-                    if(result.length > 0) {
-                        this.person = result[0]; 
+                    if(myJson.length > 0) {
+                        this.person = myJson[0]; 
                         isFav(this.person.name).then((resp)=> {
                             this.person.favorite = resp;
                             if(resp == true) {
@@ -138,7 +130,6 @@ class NameDisplay extends HTMLElement {
                         });
                         const view = getFormatedView(this.person);
                         this.shadowRoot.querySelector(".box").innerHTML = view;
-                        // TODO:: add event listenter to mark as favourite
                         this.favIcon = this.shadowRoot.querySelector(".fav");
                         this.favIcon.addEventListener('click', this.toggleFavorite)
                     } else {
