@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Name2gender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Search for name and get the corsponding gender">
+    <link rel="stylesheet" href="../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link ref="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <nav-bar active="#home"></nav-bar>
+
+  <main>
+    <!--content is populated by router.js-->
+    
+    <home-search></home-search><!--default-->
+  </main>
+  <script src="/extra/router.js"></script>
+  <script src="/components/nav-bar.js"></script>
+  <script src="/components/home-search.js"></script>
+  <script src="/components/name-display.js" type="module"></script>
+  <script src="/components/fav-orite.js" type="module"></script>
+  <script src="/components/log-in.js"></script>
+
+  <!-- 
+        the following part is commented out because import is 
+        conflicting with json-server once we stop using json-server
+        this will be using to load polyfills
+  -->
+
+  <!-- Load polyfills; note that "loader" will load these async -->
+  <!-- <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" defer></script> -->
+
+  <!-- Load a custom element definitions in `waitFor` and return a promise -->
+  <!-- <script type="module">
+    function loadScript(src) {
+      return new Promise(function(resolve, reject) {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    WebComponents.waitFor(() => {
+      // At this point we are guaranteed that all required polyfills have
+      // loaded, and can use web components APIs.
+      // Next, load element definitions that call `customElements.define`.
+      // Note: returning a promise causes the custom elements
+      // polyfill to wait until all definitions are loaded and then upgrade
+      // the document in one batch, for better performance.
+      return loadScript('components/name-display.js');
+    });
+  </script> -->
+</body>
+
+</html>
